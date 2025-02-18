@@ -18,6 +18,7 @@ import { AdminGuard } from 'src/auth/jwt/admin.guard';
 import { SellerGuard } from 'src/auth/jwt/seller.guard';
 
 @Controller('market')
+@UseGuards(JwtAuthGuard)
 export class MarketController {
   constructor(private readonly marketService: MarketService) {}
 

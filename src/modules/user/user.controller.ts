@@ -7,11 +7,14 @@ import {
   Delete,
   Query,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto, LoginDto, LogoutDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Role } from '@prisma/client';
+import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
+import { AdminGuard } from 'src/auth/jwt/admin.guard';
 
 @Controller('user')
 export class UserController {
@@ -22,6 +25,7 @@ export class UserController {
     return this.userService.register(createUserDto);
   }
   @Post()
+  @UseGuards(JwtAuthGuard, AdminGuard)
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
@@ -39,10 +43,12 @@ export class UserController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
   findAll(@Query() query: { page: string; perPage: string; role: Role }) {
     return this.userService.findAll(query);
   }
   @Get('session')
+  @UseGuards(JwtAuthGuard)
   getSession(
     @Query() query: { user_id: string; page: string; perPage: string },
   ) {
@@ -55,11 +61,13 @@ export class UserController {
   }
 
   @Put(':id')
+  @UseGuards(JwtAuthGuard)
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(id, updateUserDto);
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.userService.remove(id);
   }

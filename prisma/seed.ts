@@ -4,44 +4,65 @@ const prisma = new PrismaClient();
 
 async function main() {
   try {
-    const users = await prisma.user.createMany({
-      data: [
-        {
-          full_name: 'Admin',
-          email: 'admin@gmail.com',
-          password: bcrypt.hashSync('888999', 10),
-          role: 'admin',
-        },
-        {
-          full_name: 'Seller',
-          email: 'seller@gmail.com',
-          password: bcrypt.hashSync('888999', 10),
-          role: 'seller',
-        },
-        {
-          full_name: 'Customer',
-          email: 'customer@gmail.com',
-          password: bcrypt.hashSync('888999', 10),
-          role: 'customer',
-        },
-      ],
+    const admin = await prisma.user.create({
+      data: {
+        full_name: 'Admin',
+        email: 'admin@gmail.com',
+        password: bcrypt.hashSync('888999', 10),
+        role: 'admin',
+      },
     });
 
-    const category = await prisma.category.createMany({
+    const seller = await prisma.user.create({
+      data: {
+        full_name: 'Seller',
+        email: 'seller@gmail.com',
+        password: bcrypt.hashSync('888999', 10),
+        role: 'seller',
+      },
+    });
+
+    const category = await prisma.category.create({
+      data: {
+        name: 'Sample category',
+        description: 'Sample description good category',
+      },
+    });
+
+    const market = await prisma.market.create({
+      data: {
+        name: 'Sample Market Name',
+        user_id: seller.id,
+        description: 'Sample Market Description',
+      },
+    });
+
+    const products = await prisma.product.createMany({
       data: [
         {
-          name: 'Pakaian',
-          description: 'Pakaian Bagus Semua',
+          name: 'Sample Product Name',
+          category_id: category.id,
+          market_id: market.id,
+          description: 'Sample Description Name',
+          price: 10000,
+          stock: 10,
         },
         {
-          name: 'Elektronik',
-          description: 'Elektronik Bagus Semua',
+          name: 'Sample Product Name 2',
+          category_id: category.id,
+          market_id: market.id,
+          description: 'Sample Description Name 2',
+          price: 1000,
+          stock: 10,
         },
       ],
     });
 
     console.log({
-      users,
+      seller,
+      market,
+      admin,
+      products,
       category,
     });
   } catch (error) {
