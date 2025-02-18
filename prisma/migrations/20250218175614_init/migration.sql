@@ -15,8 +15,8 @@ CREATE TABLE "users" (
     "role" "Role" NOT NULL,
     "is_enabled" BOOLEAN NOT NULL DEFAULT true,
     "created_at" TIMESTAMPTZ(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMPTZ(3) NOT NULL,
-    "deleted_at" TIMESTAMPTZ(3) NOT NULL,
+    "updated_at" TIMESTAMPTZ(3),
+    "deleted_at" TIMESTAMPTZ(3),
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -28,8 +28,8 @@ CREATE TABLE "user_sessions" (
     "refresh_token" TEXT NOT NULL,
     "expires_at" TIMESTAMPTZ(3) NOT NULL,
     "created_at" TIMESTAMPTZ(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMPTZ(3) NOT NULL,
-    "deleted_at" TIMESTAMPTZ(3) NOT NULL,
+    "updated_at" TIMESTAMPTZ(3),
+    "deleted_at" TIMESTAMPTZ(3),
 
     CONSTRAINT "user_sessions_pkey" PRIMARY KEY ("id")
 );
@@ -40,10 +40,9 @@ CREATE TABLE "markets" (
     "user_id" TEXT NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "description" VARCHAR(255) NOT NULL,
-    "expires_at" TIMESTAMPTZ(3) NOT NULL,
     "created_at" TIMESTAMPTZ(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMPTZ(3) NOT NULL,
-    "deleted_at" TIMESTAMPTZ(3) NOT NULL,
+    "updated_at" TIMESTAMPTZ(3),
+    "deleted_at" TIMESTAMPTZ(3),
 
     CONSTRAINT "markets_pkey" PRIMARY KEY ("id")
 );
@@ -53,10 +52,9 @@ CREATE TABLE "categories" (
     "id" TEXT NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "description" VARCHAR(255) NOT NULL,
-    "expires_at" TIMESTAMPTZ(3) NOT NULL,
     "created_at" TIMESTAMPTZ(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMPTZ(3) NOT NULL,
-    "deleted_at" TIMESTAMPTZ(3) NOT NULL,
+    "updated_at" TIMESTAMPTZ(3),
+    "deleted_at" TIMESTAMPTZ(3),
 
     CONSTRAINT "categories_pkey" PRIMARY KEY ("id")
 );
@@ -70,10 +68,9 @@ CREATE TABLE "products" (
     "description" VARCHAR(255) NOT NULL,
     "price" INTEGER NOT NULL,
     "stock" INTEGER NOT NULL,
-    "expires_at" TIMESTAMPTZ(3) NOT NULL,
     "created_at" TIMESTAMPTZ(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMPTZ(3) NOT NULL,
-    "deleted_at" TIMESTAMPTZ(3) NOT NULL,
+    "updated_at" TIMESTAMPTZ(3),
+    "deleted_at" TIMESTAMPTZ(3),
 
     CONSTRAINT "products_pkey" PRIMARY KEY ("id")
 );
