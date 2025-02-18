@@ -59,7 +59,6 @@ model Market {
   user_id     String
   name        String   @db.VarChar(255)
   description String   @db.VarChar(255)
-  expires_at  DateTime @db.Timestamptz(3)
   created_at  DateTime @default(now()) @db.Timestamptz(3)
   updated_at  DateTime? @updatedAt() @db.Timestamptz(3)
   deleted_at  DateTime? @db.Timestamptz(3)
@@ -75,7 +74,6 @@ model Category {
   id          String   @id @unique @default(uuid())
   name        String   @db.VarChar(255)
   description String   @db.VarChar(255)
-  expires_at  DateTime @db.Timestamptz(3)
   created_at  DateTime @default(now()) @db.Timestamptz(3)
   updated_at  DateTime? @updatedAt() @db.Timestamptz(3)
   deleted_at  DateTime? @db.Timestamptz(3)
@@ -93,7 +91,6 @@ model Product {
   description String   @db.VarChar(255)
   price       Int      @db.Integer
   stock       Int      @db.Integer
-  expires_at  DateTime @db.Timestamptz(3)
   created_at  DateTime @default(now()) @db.Timestamptz(3)
   updated_at  DateTime? @updatedAt() @db.Timestamptz(3)
   deleted_at  DateTime? @db.Timestamptz(3)
