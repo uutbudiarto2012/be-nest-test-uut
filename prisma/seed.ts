@@ -27,8 +27,22 @@ async function main() {
       ],
     });
 
+    const category = await prisma.category.createMany({
+      data: [
+        {
+          name: 'Pakaian',
+          description: 'Pakaian Bagus Semua',
+        },
+        {
+          name: 'Elektronik',
+          description: 'Elektronik Bagus Semua',
+        },
+      ],
+    });
+
     console.log({
       users,
+      category,
     });
   } catch (error) {
     console.log(error);
